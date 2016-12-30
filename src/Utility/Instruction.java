@@ -14,6 +14,10 @@ public class Instruction {
 	public boolean src1Stall = false; 
 	public boolean src2Stall = false;
 	
+	/**
+	 * getInstructionOpcode which gets the opcode of an instruction and stores to result.
+	 * @param strOp string opcode
+	 */
 	public static Constants.OpCode getInstructionOpcode(String strOp){
 		Constants.OpCode result = null;
 		if(strOp .equalsIgnoreCase("ex-or")) return Constants.OpCode.EXOR;
@@ -27,6 +31,10 @@ public class Instruction {
 		return result;
 	}
 	
+	/**
+	 * toString method returns the instruction format to the given opcode.
+	 * @return String of the instruction or IDLE constants
+	 */
 	@Override
 	public String toString() {
 		

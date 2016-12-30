@@ -32,6 +32,10 @@ public class Processor {
 	public List<CycleListener> cycleListener = new ArrayList<CycleListener>();
 	public List<ProcessListener> processListeners = new ArrayList<ProcessListener>();
 		
+	/**
+	 * Constructor for Processor initializes the Processor and also all the stages objects, memory, registers.
+	 * @param file of string type to be processed and relevant results are stored in instruction array list in memory.
+	 */
 	public Processor(String file) {
 		memory = new Memory(file);
 		register = new Register();			
@@ -47,6 +51,12 @@ public class Processor {
 		Processor.INS_COUNT = 0;
 	}
 
+	/**
+	 * doProcess method performs process for each stage, increments the cycle, sets the isSstallflag (based on stall check logic), and
+	 * sets the src1Stall and src2Stall flags of the respective decode instruction.
+	 * The stall check logic checks whether the src1 and src2 of the decode instruction is equal to the destination
+	 * of the ALU1, ALU2, memory stage instructions.  
+	 */
 	public void doProcess(){
 		for (ProcessListener processListItr : processListeners) {
 			try{

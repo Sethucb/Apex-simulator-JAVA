@@ -14,6 +14,10 @@ public class BranchFU implements ProcessListener{
 	//Latch pc;
 	CycleListener result;
 
+	/**
+	 * Constructor for BranchFU stage initializes PC(instruction Address), result(like a latch which has results of the stage).
+	 * @param processor a Processor object.
+	 */
 	public BranchFU(Processor processor) {
 		pc = new CycleListener(processor);
 		result = new CycleListener(processor);
@@ -21,6 +25,11 @@ public class BranchFU implements ProcessListener{
 		processor.processListeners.add(this);
 	}
 	
+	/**
+	 * BranchFU process method performs relevant control operations such as branching (BZ, BNZ, BAL, JUMP), and Halt
+	 * Control flow instructions: BZ, BNZ, JUMP, BAL, HALT. Instructions following a BZ, BNZ, JUMP and BAL instruction in the pipeline 
+	 * should be flushed on a taken branch. The zero flag (Z) is set only by arithmetic instructions in ALU. 
+	 */
 	public void process() {
 		try{
 		
@@ -68,16 +77,27 @@ public class BranchFU implements ProcessListener{
 		}
 	}
 
+	/**
+	 * clearStage method clears the BranchFU stage.
+	 */
 	public void clearStage() {
 		pc.write(0);
 		result.write(0);
 		instruction = null;
 	}
 	
+	/**
+	 * pcValue method returns the pc Value(instruction address) of the BranchFU stage.
+	 * @return long value of the pc Value(instruction address)
+	 */
 	public Long pcValue(){
 		return pc.read();
 	}
 	
+	/**
+	 * toString method returns the instruction currently in BranchFU as string if instruction is not null or returns the IDLE constants.
+	 * @return String of the instruction or IDLE constants
+	 */
 	@Override
 	public String toString() {
 		if(instruction == null){
